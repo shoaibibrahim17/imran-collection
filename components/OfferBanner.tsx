@@ -6,7 +6,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import { offer, whatsappLink } from "@/lib/site-data";
-import { EASE, TAP_BTN } from "@/lib/motion";
+import { CINEMATIC, TAP_BTN } from "@/lib/motion";
 
 export default function OfferBanner() {
   return (
@@ -29,10 +29,10 @@ export default function OfferBanner() {
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
+        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
         viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.6, ease: EASE }}
+        transition={{ duration: 0.9, ease: CINEMATIC }}
         className="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-5 text-center text-ivory sm:px-6 lg:flex-row lg:justify-between lg:text-left"
       >
         <div className="max-w-2xl">

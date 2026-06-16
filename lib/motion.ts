@@ -12,6 +12,12 @@ import type { Variants, Transition } from "framer-motion";
 /** Premium easing curve (gentle ease-out, no overshoot). */
 export const EASE = [0.22, 1, 0.36, 1] as const;
 
+/**
+ * Cinematic easing — an expo-style ease-out. Content glides in fast then
+ * settles slowly, the signature of a polished scroll reveal.
+ */
+export const CINEMATIC = [0.16, 1, 0.3, 1] as const;
+
 /** Soft spring used for hover lift / tap — subtle, never bouncy. */
 export const SPRING: Transition = {
   type: "spring",
@@ -21,24 +27,45 @@ export const SPRING: Transition = {
 };
 
 /* ----------------------------- Scroll reveal ----------------------------- */
+/* Cinematic reveals: rise + gentle blur-in + soft scale, on a long expo glide.
+   Blur/opacity stay GPU-reasonable because the stagger means only a couple of
+   elements animate at any instant. */
 
-/** Fade + slight rise. Use for headings, paragraphs, standalone blocks. */
+/** Fade + rise + blur-in. Use for headings, paragraphs, standalone blocks. */
 export const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+  hidden: { opacity: 0, y: 40, filter: "blur(8px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.9, ease: CINEMATIC },
+  },
 };
 
 /** Plain fade, no movement. */
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { duration: 0.6, ease: EASE } },
+  show: { opacity: 1, transition: { duration: 0.8, ease: CINEMATIC } },
 };
+
+/** Horizontal reveal for two-column sections (image / form / copy). */
+export function sideReveal(x = 56): Variants {
+  return {
+    hidden: { opacity: 0, x, filter: "blur(8px)" },
+    show: {
+      opacity: 1,
+      x: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.9, ease: CINEMATIC },
+    },
+  };
+}
 
 /**
  * Stagger parent for card grids / lists. Children should use `fadeUp`
  * (or `cardItem`) and the parent drives their reveal in sequence.
  */
-export function staggerContainer(stagger = 0.08, delayChildren = 0.05): Variants {
+export function staggerContainer(stagger = 0.12, delayChildren = 0.08): Variants {
   return {
     hidden: {},
     show: {
@@ -47,14 +74,15 @@ export function staggerContainer(stagger = 0.08, delayChildren = 0.05): Variants
   };
 }
 
-/** Card entrance — fade + rise + the faintest scale settle. */
+/** Card entrance — cinematic rise + soft scale + blur-in. */
 export const cardItem: Variants = {
-  hidden: { opacity: 0, y: 28, scale: 0.985 },
+  hidden: { opacity: 0, y: 44, scale: 0.94, filter: "blur(6px)" },
   show: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.55, ease: EASE },
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: CINEMATIC },
   },
 };
 

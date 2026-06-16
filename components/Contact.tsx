@@ -5,6 +5,8 @@ import { MapPin, Phone, Clock, Navigation } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
+import Reveal from "@/components/Reveal";
+import { sideReveal } from "@/lib/motion";
 import {
   business,
   contact,
@@ -23,7 +25,7 @@ export default function Contact() {
   return (
     <section id="contact" className="bg-ink py-16 text-ivory sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <header className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.35em] text-gold">
             Visit Us
           </p>
@@ -35,15 +37,15 @@ export default function Contact() {
             We&apos;d love to welcome you in store. Call, message or get
             directions below.
           </p>
-        </header>
+        </Reveal>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Details */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={sideReveal(-56)}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
             className="flex flex-col gap-6"
           >
             <ul className="space-y-5">
@@ -146,10 +148,10 @@ export default function Contact() {
 
           {/* Map */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            variants={sideReveal(56)}
+            initial="hidden"
+            whileInView="show"
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
             className="min-h-80 overflow-hidden rounded-2xl border border-gold/20"
           >
             <iframe

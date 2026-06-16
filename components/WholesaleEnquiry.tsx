@@ -9,7 +9,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { collections, whatsappLink, wholesale } from "@/lib/site-data";
-import { EASE, TAP_BTN } from "@/lib/motion";
+import { sideReveal, TAP_BTN } from "@/lib/motion";
 
 export default function WholesaleEnquiry() {
   const [name, setName] = React.useState("");
@@ -36,10 +36,10 @@ export default function WholesaleEnquiry() {
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
         {/* Copy + image */}
         <motion.div
-          initial={{ opacity: 0, x: -24 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          variants={sideReveal(-56)}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: EASE }}
         >
           <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold">
             For Businesses
@@ -77,10 +77,10 @@ export default function WholesaleEnquiry() {
         {/* Form */}
         <motion.form
           onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: 24 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          variants={sideReveal(56)}
+          initial="hidden"
+          whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: EASE }}
           className="rounded-3xl border border-gold/20 bg-ink/40 p-5 backdrop-blur sm:p-8"
         >
           <div className="grid gap-4">

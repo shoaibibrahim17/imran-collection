@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { products, whatsappLink } from "@/lib/site-data";
 import {
-  EASE,
+  CINEMATIC,
   cardHover,
   imageZoom,
   cardContent,
@@ -89,10 +89,10 @@ export default function ProductGrid() {
               <motion.article
                 key={p.id}
                 layout
-                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                initial={{ opacity: 0, y: 44, scale: 0.94 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.4, delay: (i % 4) * 0.05, ease: EASE }}
+                exit={{ opacity: 0, scale: 0.94 }}
+                transition={{ duration: 0.7, delay: (i % 4) * 0.08, ease: CINEMATIC }}
                 className="h-full"
               >
                 <motion.div
