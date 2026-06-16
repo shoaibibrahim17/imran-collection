@@ -21,8 +21,8 @@ const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(
 
 export default function Contact() {
   return (
-    <section id="contact" className="bg-ink py-20 text-ivory sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="bg-ink py-16 text-ivory sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-2xl text-center">
           <p className="text-xs font-medium uppercase tracking-[0.35em] text-gold">
             Visit Us

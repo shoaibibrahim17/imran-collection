@@ -7,8 +7,8 @@ import { about, business, collections } from "@/lib/site-data";
 
 export default function About() {
   return (
-    <section id="about" className="bg-ivory py-20 sm:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
+    <section id="about" className="bg-ivory py-16 sm:py-24 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:gap-12 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
         {/* Image collage */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}

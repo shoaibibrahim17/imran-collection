@@ -171,13 +171,19 @@ export type Product = {
   tag?: string;
 };
 
+const UNSPLASH = "https://images.unsplash.com";
+/** Build a cropped, auto-formatted Unsplash URL at a sensible default size. */
+function img(photo: string, w = 800): string {
+  return `${UNSPLASH}/${photo}?auto=format&fit=crop&w=${w}&q=80`;
+}
+
 export const products: Product[] = [
   {
     id: "p1",
     name: "Banarasi Silk Saree",
     category: "Sarees",
     note: "Rich zari work for weddings & festivities.",
-    image: "/images/products/p1.svg",
+    image: img("photo-1641699862936-be9f49b1c38d"),
     tag: "Bridal",
   },
   {
@@ -185,7 +191,7 @@ export const products: Product[] = [
     name: "Designer Anarkali Suit",
     category: "Women's Ethnic Wear",
     note: "Flowing silhouette with intricate detailing.",
-    image: "/images/products/p2.svg",
+    image: img("photo-1767955694884-d4bf352c23c2"),
     tag: "New",
   },
   {
@@ -193,21 +199,21 @@ export const products: Product[] = [
     name: "Festive Kurta Set",
     category: "Menswear",
     note: "Crisp tailoring for celebrations & occasions.",
-    image: "/images/products/p3.svg",
+    image: img("photo-1770359993283-a2c2f386584e"),
   },
   {
     id: "p4",
     name: "Cotton Bedsheet Set",
     category: "Home Textiles",
     note: "Soft, breathable weaves for everyday comfort.",
-    image: "/images/products/p4.svg",
+    image: img("photo-1635594202056-9ea3b497e5c0"),
   },
   {
     id: "p5",
     name: "Embroidered Lehenga",
     category: "Women's Ethnic Wear",
     note: "Statement bridal piece with fine embroidery.",
-    image: "/images/products/p5.svg",
+    image: img("photo-1759906760638-eeffcb471e53"),
     tag: "Bridal",
   },
   {
@@ -215,7 +221,7 @@ export const products: Product[] = [
     name: "Wedding Sherwani",
     category: "Menswear",
     note: "Regal detailing for the groom's big day.",
-    image: "/images/products/p6.svg",
+    image: img("photo-1781106699930-a692cfe30226"),
     tag: "Festive",
   },
   {
@@ -223,14 +229,14 @@ export const products: Product[] = [
     name: "Kanjeevaram Saree",
     category: "Sarees",
     note: "Traditional South Indian silk with gold borders.",
-    image: "/images/products/p7.svg",
+    image: img("photo-1692992193981-d3d92fabd9cb"),
   },
   {
     id: "p8",
     name: "Curtains & Drapery",
     category: "Home Textiles",
     note: "Elegant furnishings to elevate any room.",
-    image: "/images/products/p8.svg",
+    image: img("photo-1754611380518-61a923cc47ca"),
   },
 ];
 
@@ -243,6 +249,8 @@ export const offer = {
   title: "The Festive & Wedding Edit",
   text: "Discover our latest arrivals in sarees, ethnic wear and menswear. Visit us in store or message on WhatsApp to know more — contact store to confirm availability.",
   cta: "Enquire on WhatsApp",
+  image: img("photo-1773291934435-adb824c7f040", 1200),
+  imageAlt: "Stacks of richly coloured festive fabrics in store",
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -250,12 +258,36 @@ export const offer = {
 /* -------------------------------------------------------------------------- */
 
 export const gallery: { id: string; src: string; alt: string }[] = [
-  { id: "g1", src: "/images/gallery/g1.svg", alt: "Imran Collections store front in Adilabad" },
-  { id: "g2", src: "/images/gallery/g2.svg", alt: "Wall of sarees on display in store" },
-  { id: "g3", src: "/images/gallery/g3.svg", alt: "Menswear section inside the showroom" },
-  { id: "g4", src: "/images/gallery/g4.svg", alt: "Home textiles and furnishings display" },
-  { id: "g5", src: "/images/gallery/g5.svg", alt: "Festive collection display" },
-  { id: "g6", src: "/images/gallery/g6.svg", alt: "Bridal corner with lehengas and silk sarees" },
+  {
+    id: "g1",
+    src: img("photo-1441986300917-64674bd600d8", 900),
+    alt: "Inside a premium clothing showroom with neatly arranged garments",
+  },
+  {
+    id: "g2",
+    src: img("photo-1779894765198-35a622862325", 900),
+    alt: "Shelves stacked with vibrant folded fabrics and textiles",
+  },
+  {
+    id: "g3",
+    src: img("photo-1555529771-835f59fc5efe", 900),
+    alt: "Racks of clothing on display inside the store",
+  },
+  {
+    id: "g4",
+    src: img("photo-1507434745378-235a6297156b", 900),
+    alt: "Folded home textiles arranged by colour",
+  },
+  {
+    id: "g5",
+    src: img("photo-1774271695014-edbd58e54882", 900),
+    alt: "Stacks of richly coloured festive textiles",
+  },
+  {
+    id: "g6",
+    src: img("photo-1521335629791-ce4aec67dd15", 900),
+    alt: "Brightly lit retail floor with garments on display",
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -270,6 +302,8 @@ export const wholesale = {
     "Bulk orders for shops & events",
     "Personalised assistance in store",
   ] as string[],
+  image: img("photo-1705250466297-90035b3a2b26", 1000),
+  imageAlt: "Neatly folded stacks of fabric ready for bulk orders",
 } as const;
 
 /* -------------------------------------------------------------------------- */

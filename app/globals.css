@@ -189,4 +189,59 @@
   .font-display {
     font-family: var(--font-display);
   }
+
+  /* Soft gold glow for primary CTAs — gently breathes, pauses for reduced motion */
+  .cta-glow {
+    box-shadow: 0 0 0 0 rgba(197, 162, 83, 0);
+    animation: cta-pulse 3.2s ease-in-out infinite;
+  }
+  @keyframes cta-pulse {
+    0%,
+    100% {
+      box-shadow: 0 8px 30px -10px rgba(197, 162, 83, 0.45);
+    }
+    50% {
+      box-shadow: 0 12px 44px -8px rgba(197, 162, 83, 0.7);
+    }
+  }
+
+  /* Animated gold underline that grows from the start on hover/focus */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: var(--gold);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Hide horizontal scrollbar on scroll-snap rows while keeping them scrollable */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Pause decorative looping animations for reduced-motion visitors */
+@media (prefers-reduced-motion: reduce) {
+  .cta-glow {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }

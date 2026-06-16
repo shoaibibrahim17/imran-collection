@@ -2,40 +2,29 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { products, whatsappLink } from "@/lib/site-data";
+import {
+  EASE,
+  cardHover,
+  imageZoom,
+  cardContent,
+  TAP,
+  TAP_BTN,
+} from "@/lib/motion";
+import Reveal from "@/components/Reveal";
 
 const ALL = "All";
-
-/* Hover choreography, propagated from the card to its children. Transform and
-   opacity only — cheap to animate even across the full grid. */
-const card: Variants = {
-  rest: {
-    y: 0,
-    boxShadow: "0 12px 30px -20px rgba(0,0,0,0.5)",
-    transition: { type: "spring", stiffness: 300, damping: 26 },
-  },
-  hover: {
-    y: -8,
-    boxShadow: "0 30px 55px -24px rgba(0,0,0,0.65)",
-    transition: { type: "spring", stiffness: 300, damping: 26 },
-  },
-};
-
-const image: Variants = {
-  rest: { scale: 1, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-  hover: { scale: 1.07, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
-
-const content: Variants = {
-  rest: { y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-  hover: { y: -3, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
-};
+const cardVar = cardHover(
+  "0 12px 30px -20px rgba(0,0,0,0.55)",
+  "0 30px 55px -24px rgba(0,0,0,0.7)",
+  -8
+);
 
 export default function ProductGrid() {
   const categories = React.useMemo(
@@ -49,87 +38,90 @@ export default function ProductGrid() {
   );
 
   return (
-    <section id="featured" className="bg-ink py-20 text-ivory sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-medium uppercase tracking-[0.35em] text-gold">
+    <section id="featured" className="bg-ink py-16 text-ivory sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold">
             Catalogue
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ivory sm:text-4xl">
             Featured Pieces
           </h2>
-          <div className="rule-gold mx-auto mt-6 w-40" />
-          <p className="mt-6 text-base text-ivory/65">
+          <div className="rule-gold mx-auto mt-5 w-36 sm:mt-6 sm:w-40" />
+          <p className="mt-5 text-[15px] text-ivory/65 sm:mt-6 sm:text-base">
             A glimpse of what you&apos;ll find in store. Prices and availability
             — contact store to confirm.
           </p>
-        </header>
+        </Reveal>
 
-        {/* Category filter */}
+        {/* Category filter — horizontally scrollable on small screens */}
         <div
           role="tablist"
           aria-label="Filter products by category"
-          className="mt-10 flex flex-wrap justify-center gap-2"
+          className="no-scrollbar mt-8 flex snap-x gap-2 overflow-x-auto pb-1 sm:mt-10 sm:flex-wrap sm:justify-center sm:overflow-visible"
         >
           {categories.map((cat) => (
-            <button
+            <motion.button
               key={cat}
               role="tab"
               aria-selected={active === cat}
               onClick={() => setActive(cat)}
+              whileTap={TAP_BTN}
               className={cn(
-                "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                "shrink-0 snap-start rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                 active === cat
                   ? "border-gold bg-gold text-ink"
                   : "border-gold/25 text-ivory/70 hover:border-gold/60 hover:text-gold"
               )}
             >
               {cat}
-            </button>
+            </motion.button>
           ))}
         </div>
 
         {/* Grid */}
         <motion.div
           layout
-          className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-10 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
         >
           <AnimatePresence mode="popLayout">
-            {visible.map((p) => (
+            {visible.map((p, i) => (
               <motion.article
                 key={p.id}
                 layout
-                initial={{ opacity: 0, scale: 0.96 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
+                transition={{ duration: 0.4, delay: (i % 4) * 0.05, ease: EASE }}
                 className="h-full"
               >
                 <motion.div
-                  variants={card}
+                  variants={cardVar}
                   initial="rest"
                   animate="rest"
                   whileHover="hover"
-                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]"
+                  whileFocus="hover"
+                  whileTap={TAP}
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
-                    <motion.div variants={image} className="absolute inset-0">
+                    <motion.div variants={imageZoom} className="absolute inset-0">
                       <Image
                         src={p.image}
-                        alt={p.name}
+                        alt={`${p.name} — ${p.category}`}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-cover"
                       />
                     </motion.div>
                     {p.tag ? (
-                      <Badge className="absolute left-3 top-3 border-transparent bg-gold text-ink">
+                      <Badge className="absolute left-3 top-3 border-transparent bg-gold text-ink shadow-sm">
                         {p.tag}
                       </Badge>
                     ) : null}
                   </div>
                   <motion.div
-                    variants={content}
+                    variants={cardContent}
                     className="flex flex-1 flex-col p-4"
                   >
                     <p className="text-[11px] uppercase tracking-[0.2em] text-gold/80">
@@ -141,22 +133,24 @@ export default function ProductGrid() {
                     <p className="mt-1 flex-1 text-sm leading-relaxed text-ivory/60">
                       {p.note}
                     </p>
-                    <Button
-                      asChild
-                      size="lg"
-                      variant="outline"
-                      className="mt-4 border-gold/40 bg-transparent text-ivory hover:bg-gold/10 hover:text-gold"
-                    >
-                      <a
-                        href={whatsappLink(
-                          `Hello Imran Collections, I'm interested in the ${p.name} (${p.category}). Could you share more details?`
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <motion.div whileTap={TAP_BTN} className="mt-4">
+                      <Button
+                        asChild
+                        size="lg"
+                        variant="outline"
+                        className="w-full border-gold/40 bg-transparent text-ivory hover:bg-gold/10 hover:text-gold"
                       >
-                        <FaWhatsapp aria-hidden /> Enquire
-                      </a>
-                    </Button>
+                        <a
+                          href={whatsappLink(
+                            `Hello Imran Collections, I'm interested in the ${p.name} (${p.category}). Could you share more details?`
+                          )}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <FaWhatsapp aria-hidden /> Enquire
+                        </a>
+                      </Button>
+                    </motion.div>
                   </motion.div>
                 </motion.div>
               </motion.article>

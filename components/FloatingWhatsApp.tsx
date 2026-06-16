@@ -28,6 +28,7 @@ export default function FloatingWhatsApp() {
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
+          whileTap={{ scale: 0.92 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
           className="group fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-black/25 ring-1 ring-black/5 transition-transform hover:scale-105"
         >

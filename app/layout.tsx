@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
+import MotionProvider from "@/components/MotionProvider";
 import {
   business,
   contact,
@@ -155,7 +156,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-ink text-ivory">
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <script
           type="application/ld+json"
           // JSON-LD must be a raw string; data is first-party and static.
