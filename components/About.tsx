@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-import { about, business } from "@/lib/site-data";
+import { about, business, collections } from "@/lib/site-data";
 
 export default function About() {
   return (
@@ -19,8 +19,8 @@ export default function About() {
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-2xl ring-1 ring-black/10">
             <Image
-              src="/images/collections/sarees.svg"
-              alt="Sarees on display at Imran Collections"
+              src={collections[0].image}
+              alt="Premium sarees at Imran Collections"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
@@ -28,8 +28,8 @@ export default function About() {
           </div>
           <div className="absolute -bottom-6 -right-2 hidden aspect-square w-40 overflow-hidden rounded-xl ring-4 ring-ivory sm:block">
             <Image
-              src="/images/gallery/g6.svg"
-              alt="Bridal corner at the store"
+              src={collections[1].image}
+              alt="Women's ethnic wear at the store"
               fill
               sizes="160px"
               className="object-cover"

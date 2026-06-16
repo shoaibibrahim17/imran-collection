@@ -126,28 +126,32 @@ export const collections: Collection[] = [
     id: "sarees",
     name: "Sarees",
     blurb: "Silk, cotton & festive drapes in timeless weaves and colours.",
-    image: "/images/collections/sarees.svg",
+    image:
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80",
     accent: "maroon",
   },
   {
     id: "ethnic",
     name: "Women's Ethnic Wear",
     blurb: "Suits, anarkalis and lehengas for every celebration.",
-    image: "/images/collections/ethnic.svg",
+    image:
+      "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=80",
     accent: "forest",
   },
   {
     id: "menswear",
     name: "Menswear",
     blurb: "Kurtas, sherwanis and ethnic sets for the modern man.",
-    image: "/images/collections/menswear.svg",
+    image:
+      "https://images.unsplash.com/photo-1598808503746-f34c53b9323e?auto=format&fit=crop&w=900&q=80",
     accent: "ink",
   },
   {
     id: "home-textiles",
     name: "Home Textiles",
     blurb: "Bedsheets, furnishings and drapery to dress your home.",
-    image: "/images/collections/home-textiles.svg",
+    image:
+      "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&w=900&q=80",
     accent: "beige",
   },
 ];
