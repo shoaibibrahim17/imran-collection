@@ -241,6 +241,19 @@ export const products: Product[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
+/*  Hero slideshow (auto-rotating background)                                 */
+/* -------------------------------------------------------------------------- */
+
+/** Full-bleed hero images that cross-fade automatically. High-res variants. */
+export const heroImages: { src: string; alt: string }[] = [
+  { src: img("photo-1610030469983-98e550d6193c", 1600), alt: "Woman in a premium silk saree" },
+  { src: img("photo-1617627143750-d86bc21e42bb", 1600), alt: "Woman in festive women's ethnic wear" },
+  { src: img("photo-1598808503746-f34c53b9323e", 1600), alt: "Menswear on display in the store" },
+  { src: img("photo-1754611380518-61a923cc47ca", 1600), alt: "Elegant curtains and home drapery" },
+  { src: img("photo-1616627561950-9f746e330187", 1600), alt: "Home textiles and soft furnishings" },
+];
+
+/* -------------------------------------------------------------------------- */
 /*  Offer banner                                                              */
 /* -------------------------------------------------------------------------- */
 

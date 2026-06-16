@@ -1,7 +1,8 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Phone, Navigation } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 
@@ -9,28 +10,69 @@ import { Button } from "@/components/ui/button";
 import { EASE, staggerContainer, fadeUp, TAP_BTN } from "@/lib/motion";
 import {
   business,
-  collections,
   contact,
   directionsLink,
+  heroImages,
   telLink,
   whatsappLink,
 } from "@/lib/site-data";
+import { cn } from "@/lib/utils";
+
+/** How long each background image stays before cross-fading (ms). */
+const SLIDE_INTERVAL = 5000;
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const [active, setActive] = React.useState(0);
+
+  // Auto-advance the background slideshow. Paused for reduced-motion users.
+  React.useEffect(() => {
+    if (reduceMotion || heroImages.length < 2) return;
+    const id = window.setInterval(() => {
+      setActive((i) => (i + 1) % heroImages.length);
+    }, SLIDE_INTERVAL);
+    return () => window.clearInterval(id);
+  }, [reduceMotion]);
+
   return (
     <section
       id="top"
       className="relative flex min-h-[100svh] items-center overflow-hidden bg-ink text-ivory"
     >
-      {/* Background image + layered overlays for legibility */}
-      <Image
-        src={collections[0].image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center opacity-70"
-      />
+      {/* Auto-rotating background slideshow — all images stay mounted and
+          cross-fade via opacity, with a slow Ken-Burns zoom on the active one. */}
+      <div className="absolute inset-0">
+        {heroImages.map((slide, i) => {
+          const isActive = i === active;
+          return (
+            <motion.div
+              key={slide.src}
+              aria-hidden={!isActive}
+              className="absolute inset-0"
+              initial={false}
+              animate={{
+                opacity: isActive ? 0.7 : 0,
+                scale: reduceMotion ? 1 : isActive ? 1.08 : 1,
+              }}
+              transition={{
+                opacity: { duration: 1.4, ease: EASE },
+                scale: { duration: (SLIDE_INTERVAL + 1400) / 1000, ease: "linear" },
+              }}
+            >
+              <Image
+                src={slide.src}
+                alt=""
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Legibility overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/70 to-ink" />
       <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_0%,transparent,rgba(20,20,22,0.7))]" />
 
@@ -138,6 +180,23 @@ export default function Hero() {
           <span className="h-px flex-1 bg-gradient-to-l from-transparent to-gold/40" />
         </motion.div>
       </motion.div>
+
+      {/* Slide indicators */}
+      <div className="absolute inset-x-0 bottom-16 z-10 flex justify-center gap-2.5">
+        {heroImages.map((slide, i) => (
+          <button
+            key={slide.src}
+            type="button"
+            onClick={() => setActive(i)}
+            aria-label={`Show ${slide.alt}`}
+            aria-current={i === active}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-500",
+              i === active ? "w-7 bg-gold" : "w-2.5 bg-ivory/40 hover:bg-ivory/70"
+            )}
+          />
+        ))}
+      </div>
 
       {/* Scroll hint */}
       <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center">
