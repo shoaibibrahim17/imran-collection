@@ -38,7 +38,7 @@ export default function ProductGrid() {
   );
 
   return (
-    <section id="featured" className="bg-ink py-16 text-ivory sm:py-24 lg:py-28">
+    <section id="featured" className="bg-ink py-10 text-ivory sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-gold">
@@ -82,7 +82,7 @@ export default function ProductGrid() {
         {/* Grid */}
         <motion.div
           layout
-          className="mt-10 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
+          className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:grid-cols-4"
         >
           <AnimatePresence mode="popLayout">
             {visible.map((p, i) => (
@@ -102,7 +102,7 @@ export default function ProductGrid() {
                   whileHover="hover"
                   whileFocus="hover"
                   whileTap={TAP}
-                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03]"
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] sm:rounded-3xl"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <motion.div variants={imageZoom} className="absolute inset-0">
@@ -110,35 +110,35 @@ export default function ProductGrid() {
                         src={p.image}
                         alt={`${p.name} — ${p.category}`}
                         fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                         className="object-cover"
                       />
                     </motion.div>
                     {p.tag ? (
-                      <Badge className="absolute left-3 top-3 border-transparent bg-gold text-ink shadow-sm">
+                      <Badge className="absolute left-2.5 top-2.5 border-transparent bg-gold text-ink shadow-sm sm:left-3 sm:top-3">
                         {p.tag}
                       </Badge>
                     ) : null}
                   </div>
                   <motion.div
                     variants={cardContent}
-                    className="flex flex-1 flex-col p-4"
+                    className="flex flex-1 flex-col p-3 sm:p-4"
                   >
-                    <p className="text-[11px] uppercase tracking-[0.2em] text-gold/80">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-gold/80 sm:text-[11px] sm:tracking-[0.2em]">
                       {p.category}
                     </p>
-                    <h3 className="mt-1 font-display text-lg font-semibold text-ivory">
+                    <h3 className="mt-1 font-display text-[15px] font-semibold leading-snug text-ivory sm:text-lg">
                       {p.name}
                     </h3>
-                    <p className="mt-1 flex-1 text-sm leading-relaxed text-ivory/60">
+                    <p className="mt-1 flex-1 text-xs leading-relaxed text-ivory/60 sm:text-sm">
                       {p.note}
                     </p>
-                    <motion.div whileTap={TAP_BTN} className="mt-4">
+                    <motion.div whileTap={TAP_BTN} className="mt-3 sm:mt-4">
                       <Button
                         asChild
                         size="lg"
                         variant="outline"
-                        className="w-full border-gold/40 bg-transparent text-ivory hover:bg-gold/10 hover:text-gold"
+                        className="h-10 w-full border-gold/40 bg-transparent px-3 text-sm text-ivory hover:bg-gold/10 hover:text-gold sm:h-11"
                       >
                         <a
                           href={whatsappLink(

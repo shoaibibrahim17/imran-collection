@@ -52,19 +52,25 @@ export default function Hero() {
               initial={false}
               animate={{
                 opacity: isActive ? 0.7 : 0,
+                // Continuous Ken-Burns zoom on the active slide over its full
+                // on-screen duration; non-active slides reset to 1.
                 scale: reduceMotion ? 1 : isActive ? 1.08 : 1,
               }}
               transition={{
-                opacity: { duration: 1.4, ease: EASE },
-                scale: { duration: (SLIDE_INTERVAL + 1400) / 1000, ease: "linear" },
+                opacity: { duration: 0.7, ease: EASE },
+                scale: { duration: SLIDE_INTERVAL / 1000, ease: "linear" },
               }}
             >
               <Image
                 src={slide.src}
                 alt=""
                 fill
+                // `priority` preloads the first slide and sets a high fetch
+                // priority; the rest load lazily as the slideshow advances.
                 priority={i === 0}
-                sizes="100vw"
+                // Full-bleed slot, but cap the request so large/retina screens
+                // don't pull a 3840px source for a hero this size.
+                sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, (max-width: 1536px) 1536px, 1920px"
                 className="object-cover object-center"
               />
             </motion.div>
@@ -115,11 +121,20 @@ export default function Hero() {
           {contact.address.city}, {contact.address.state}
         </motion.p>
 
+        {/* Thin gold accent */}
+        <motion.span
+          aria-hidden
+          variants={fadeUp}
+          className="mx-auto mt-5 block h-px w-16 bg-gradient-to-r from-transparent via-gold to-transparent sm:mt-6"
+        />
+
         <motion.h1
           variants={fadeUp}
-          className="mx-auto mt-5 max-w-4xl font-display text-[2.6rem] font-semibold leading-[1.05] tracking-tight sm:mt-6 sm:text-6xl lg:text-7xl"
+          className="mx-auto mt-5 max-w-4xl font-display text-[2.9rem] font-bold leading-[1.02] tracking-tight sm:mt-6 sm:text-7xl lg:text-[5.25rem]"
         >
-          <span className="text-gold-foil">{business.name}</span>
+          <span className="text-gold-foil drop-shadow-[0_2px_24px_rgba(197,162,83,0.25)]">
+            {business.name}
+          </span>
         </motion.h1>
 
         <motion.p

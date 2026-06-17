@@ -16,7 +16,7 @@ export default function TrustStrip() {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
-        className="mx-auto grid max-w-7xl grid-cols-2 gap-px bg-gold/10 sm:grid-cols-4"
+        className="no-scrollbar mx-auto flex max-w-7xl snap-x gap-px overflow-x-auto bg-gold/10 sm:grid sm:grid-cols-4 sm:overflow-visible"
       >
         {trustItems.map((item) => {
           const Icon = item.icon;
@@ -24,7 +24,7 @@ export default function TrustStrip() {
             <motion.div
               key={item.title}
               variants={fadeUp}
-              className="flex flex-col items-center gap-2 bg-ink px-4 py-8 text-center sm:flex-row sm:items-start sm:gap-4 sm:text-left"
+              className="flex min-w-[46%] shrink-0 snap-start flex-col items-center gap-2 bg-ink px-4 py-5 text-center sm:min-w-0 sm:flex-row sm:items-start sm:gap-4 sm:py-8 sm:text-left"
             >
               <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-gold/30 text-gold">
                 <Icon className="size-5" aria-hidden />

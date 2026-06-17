@@ -32,7 +32,7 @@ export default function WholesaleEnquiry() {
   }
 
   return (
-    <section id="wholesale" className="bg-forest py-16 text-ivory sm:py-24 lg:py-28">
+    <section id="wholesale" className="bg-forest py-10 text-ivory sm:py-24 lg:py-28">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8">
         {/* Copy + image */}
         <motion.div
@@ -92,7 +92,7 @@ export default function WholesaleEnquiry() {
                 id="we-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Ravi Kumar"
+                placeholder="e.g. Sk Ibrahim"
                 autoComplete="name"
                 className="h-11 border-gold/25 bg-white/5 text-ivory placeholder:text-ivory/40"
               />
@@ -107,7 +107,7 @@ export default function WholesaleEnquiry() {
                 id="we-shop"
                 value={shop}
                 onChange={(e) => setShop(e.target.value)}
-                placeholder="e.g. Kumar Textiles"
+                placeholder="e.g. Noman Textiles"
                 autoComplete="organization"
                 className="h-11 border-gold/25 bg-white/5 text-ivory placeholder:text-ivory/40"
               />

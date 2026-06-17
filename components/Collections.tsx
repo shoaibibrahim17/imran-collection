@@ -31,7 +31,7 @@ const cta = {
 
 export default function Collections() {
   return (
-    <section id="collections" className="bg-ivory py-16 sm:py-24 lg:py-28">
+    <section id="collections" className="bg-ivory py-10 sm:py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
           <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-maroon">

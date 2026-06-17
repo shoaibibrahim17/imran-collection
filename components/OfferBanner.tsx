@@ -12,7 +12,7 @@ export default function OfferBanner() {
   return (
     <section
       aria-label="Featured offer"
-      className="relative overflow-hidden bg-maroon py-14 sm:py-20"
+      className="relative overflow-hidden bg-maroon py-10 sm:py-20"
     >
       {/* Real promo image, dimmed into the maroon for legibility */}
       <Image
